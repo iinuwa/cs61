@@ -9,7 +9,7 @@
 ; analogous procedure called product that returns the product of the values of
 ; a function at points over a given range.
 
-(define (exercises2-1a-1)
+(define (exercise2.1-1.31a)
   (define (double a) (* a 2))
   (equal? (product double inc 1 3) 48))
 
@@ -18,34 +18,31 @@
       1
       (* (term a) 
 	 (product term next (next a) b))))
-'exercise2-1a-1
-(exercises2-1a-1)
+(exercise2.1-1.31a)
 
 ; Homework 2.1b
 ; SICP Exercise 1.31b
 ;  Show how to define factorial in terms of product.
-(define (exercises2-1a-2)
+(define (exercise2.1-1.31b)
   (equal? (factorial 5) 120))
-(define exercises2-1a-3-expected (/ (* 2 4 4 6 6 8) (* 3 3 5 5 7 7)))
 
 (define (factorial b)
   (product identity inc 1 b))
 
-'exercise2-1a-2
-(exercises2-1a-2)
+(exercise2.1-1.31b)
 
 ; Homework 2.1c
 ; SICP Exercise 1.31c
 ; Use `product` to compute approximations to π using the formula (by John
 ; Wallis).
-(define (exercises2-1a-3)
-  (equal? (pi-approx 6) exercises2-1a-3-expected))
+(define exercise2.1-1.31c-expected (/ (* 2 4 4 6 6 8) (* 3 3 5 5 7 7)))
+(define (exercise2.1-1.31c)
+  (equal? (pi-approx 6) exercise2.1-1.31c-expected))
 (define (pi-approx b)
   (/ (product (lambda (x) (+ 2 (* 2 (floor (/ x 2))))) inc 1 b)
      (product (lambda (x) (+ 3 (* 2 (floor (/ (- x 1) 2))))) inc 1 b)))
 
-'exercises2-1a-3
-(exercises2-1a-3)
+(exercise2.1-1.31c)
 
 ; Homework 2.1
 ; SICP Exercise 1.32
@@ -53,7 +50,7 @@
 ; notion called accumulate that combines a collection of terms, using some
 ; general accumulation function...
 
-(define (exercises2-1b)
+(define (exercise2.1-1.32)
   (define (sum-accum term next a b)
     (accumulate + 0 term next a b))
   (define (product-accum term next a b)
@@ -68,8 +65,7 @@
       (combiner (term a)
 		(accumulate combiner null-value term next (next a) b))))
 
-'exercises2-1b
-(exercises2-1b)
+(exercise2.1-1.32)
 
 ; Homework 2.1d
 ; SICP Exercise 1.40
@@ -84,7 +80,7 @@
 ; example, if `inc` is a procedure that adds 1 to its argument, then
 ; `(double inc)` should be a procedure that adds 2. What value is returned by
 ; `(((double (double double)) inc) 5)`
-(define (exercises2-1e)
+(define (exercise2.1-1.41)
   (define double-inc (double inc))
   (and (equal? (double-inc 3) 5)
        (equal? (((double (double double)) inc) 5) 21)))
@@ -92,7 +88,7 @@
 (define (double fn)
   (lambda (x) (fn (fn x))))
 
-(exercises2-1e)
+(exercise2.1-1.41)
 
 ; Homework 2.1f
 ; SICP Exercise 1.43
@@ -109,7 +105,7 @@
 ; ((repeated square 2) 5)
 ; 625
 
-(define (exercise2.1f)
+(define (exercise2.1-1.43)
   (equal? ((repeated square 2) 5) 625))
 
 (define (repeated fn n)
@@ -117,7 +113,7 @@
     (lambda (x) (f (g x))))
   (accumulate compose identity (lambda (_) fn) inc 1 n))
 
-(exercise2.1f)
+(exercise2.1-1.43)
 ; Homework 2.1g
 ; SICP Exercise 1.46
 ; Several of the numerical methods described in this chapter are instances of
